@@ -14,39 +14,39 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@EnableJpaRepositories (repositoryFactoryBeanClass = JpaRepositoryExtFactoryBean.class)
+@EnableJpaRepositories(repositoryFactoryBeanClass = JpaRepositoryExtFactoryBean.class)
 public @interface EnableExtJpaRepositories {
 
     /**
      * Alias for the {@link #basePackages()} attribute. Allows for more concise annotation declarations e.g.:
      * {@code @EnableJpaRepositories("org.my.pkg")} instead of {@code @EnableJpaRepositories(basePackages="org.my.pkg")}.
      */
-    @AliasFor
+    @AliasFor(annotation = EnableJpaRepositories.class)
     String[] value() default {};
 
     /**
      * Base packages to scan for annotated components. {@link #value()} is an alias for (and mutually exclusive with) this
      * attribute. Use {@link #basePackageClasses()} for a type-safe alternative to String-based package names.
      */
-    @AliasFor String[] basePackages() default {};
+    @AliasFor(annotation = EnableJpaRepositories.class) String[] basePackages() default {};
 
     /**
      * Type-safe alternative to {@link #basePackages()} for specifying the packages to scan for annotated components. The
      * package of each class specified will be scanned. Consider creating a special no-op marker class or interface in
      * each package that serves no purpose other than being referenced by this attribute.
      */
-    @AliasFor Class<?>[] basePackageClasses() default {};
+    @AliasFor(annotation = EnableJpaRepositories.class) Class<?>[] basePackageClasses() default {};
 
     /**
      * Specifies which types are eligible for component scanning. Further narrows the set of candidate components from
      * everything in {@link #basePackages()} to everything in the base packages that matches the given filter or filters.
      */
-    @AliasFor ComponentScan.Filter[] includeFilters() default {};
+    @AliasFor(annotation = EnableJpaRepositories.class) ComponentScan.Filter[] includeFilters() default {};
 
     /**
      * Specifies which types are not eligible for component scanning.
      */
-    @AliasFor ComponentScan.Filter[] excludeFilters() default {};
+    @AliasFor(annotation = EnableJpaRepositories.class) ComponentScan.Filter[] excludeFilters() default {};
 
     /**
      * Returns the postfix to be used when looking up custom repository implementations. Defaults to {@literal Impl}. So
@@ -55,7 +55,7 @@ public @interface EnableExtJpaRepositories {
      *
      * @return
      */
-    @AliasFor String repositoryImplementationPostfix() default "Impl";
+    @AliasFor(annotation = EnableJpaRepositories.class) String repositoryImplementationPostfix() default "Impl";
 
     /**
      * Configures the location of where to find the Spring Data named queries properties file. Will default to
@@ -63,7 +63,7 @@ public @interface EnableExtJpaRepositories {
      *
      * @return
      */
-    @AliasFor String namedQueriesLocation() default "";
+    @AliasFor(annotation = EnableJpaRepositories.class) String namedQueriesLocation() default "";
 
     /**
      * Returns the key of the {@link QueryLookupStrategy} to be used for lookup queries for query methods. Defaults to
@@ -71,14 +71,15 @@ public @interface EnableExtJpaRepositories {
      *
      * @return
      */
-    @AliasFor QueryLookupStrategy.Key queryLookupStrategy() default QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND;
+    @AliasFor(annotation = EnableJpaRepositories.class) QueryLookupStrategy.Key queryLookupStrategy() default QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND;
+
     /**
      * Configure the repository base class to be used to create repository proxies for this particular configuration.
      *
      * @return
      * @since 1.9
      */
-    @AliasFor Class<?> repositoryBaseClass() default DefaultRepositoryBaseClass.class;
+    @AliasFor(annotation = EnableJpaRepositories.class) Class<?> repositoryBaseClass() default DefaultRepositoryBaseClass.class;
 
     // JPA specific configuration
 
@@ -88,7 +89,7 @@ public @interface EnableExtJpaRepositories {
      *
      * @return
      */
-    @AliasFor String entityManagerFactoryRef() default "entityManagerFactory";
+    @AliasFor(annotation = EnableJpaRepositories.class) String entityManagerFactoryRef() default "entityManagerFactory";
 
     /**
      * Configures the name of the {@link PlatformTransactionManager} bean definition to be used to create repositories
@@ -96,13 +97,13 @@ public @interface EnableExtJpaRepositories {
      *
      * @return
      */
-    @AliasFor String transactionManagerRef() default "transactionManager";
+    @AliasFor(annotation = EnableJpaRepositories.class) String transactionManagerRef() default "transactionManager";
 
     /**
      * Configures whether nested repository-interfaces (e.g. defined as inner classes) should be discovered by the
      * repositories infrastructure.
      */
-    @AliasFor boolean considerNestedRepositories() default false;
+    @AliasFor(annotation = EnableJpaRepositories.class) boolean considerNestedRepositories() default false;
 
     /**
      * Configures whether to enable default transactions for Spring Data JPA repositories. Defaults to {@literal true}. If
@@ -111,5 +112,5 @@ public @interface EnableExtJpaRepositories {
      *
      * @return whether to enable default transactions, defaults to {@literal true}.
      */
-    @AliasFor boolean enableDefaultTransactions() default true;
+    @AliasFor(annotation = EnableJpaRepositories.class) boolean enableDefaultTransactions() default true;
 }
